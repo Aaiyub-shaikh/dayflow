@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Employee Management System Dashboard">
+    <title>Employee Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="loginPage" class="login-page" role="main" aria-labelledby="login-title">
+        <div class="login-card">
+            <h1 id="login-title" class="login-title">Employee Management System</h1>
+            <p class="login-subtitle">Enter your details and select your role to continue</p>
+            <form id="loginForm" class="login-form" autocomplete="off">
+                <div class="form-group">
+                    <label for="loginName" class="form-label">Name</label>
+                    <input type="text" id="loginName" name="name" class="form-input" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginEmail" class="form-label">Email</label>
+                    <input type="email" id="loginEmail" name="email" class="form-input" placeholder="you@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Login as</label>
+                    <div class="login-role-options">
+                        <label class="radio-option">
+                            <input type="radio" name="role" value="employee" checked>
+                            <span>Employee</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="role" value="admin">
+                            <span>Admin</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword" class="form-label">Password</label>
+                    <input type="password" id="loginPassword" name="password" class="form-input" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn btn-primary login-button">Continue</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Role Switcher -->
+    <div class="role-switcher" role="toolbar" aria-label="Role switcher">
+        <button class="role-btn active" data-role="employee" aria-pressed="true">
+            <span class="role-icon">👤</span>
+            <span class="role-text">Employee</span>
+        </button>
+        <button class="role-btn" data-role="admin" aria-pressed="false">
+            <span class="role-icon">👨‍💼</span>
+            <span class="role-text">Admin</span>
+        </button>
+    </div>
+
+    <!-- Employee Dashboard -->
+    <div id="employeeDashboard" class="dashboard" role="main">
+        <button class="mobile-menu-toggle" id="employeeMenuToggle" aria-label="Toggle navigation menu">
+            <span class="hamburger-icon">☰</span>
+        </button>
+
+        <aside class="sidebar" id="employeeSidebar" role="navigation" aria-label="Employee navigation">
+            <div class="sidebar-header">
+                <h1>🏢 EMS Portal</h1>
+                <span class="role-badge" aria-label="Current role">Employee</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <button class="nav-link active" data-section="dashboard" aria-current="page">
+                        <span class="nav-icon" aria-hidden="true">📊</span>
+                        Dashboard
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" data-modal="profileModal">
+                        <span class="nav-icon" aria-hidden="true">👤</span>
+                        My Profile
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" data-modal="attendanceModal">
+                        <span class="nav-icon" aria-hidden="true">📅</span>
+                        Attendance
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" data-modal="leaveModal">
+                        <span class="nav-icon" aria-hidden="true">🏖️</span>
+                        Leave Requests
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" data-modal="payrollModal">
+                        <span class="nav-icon" aria-hidden="true">💰</span>
+                        My Payroll
+                    </button>
+                </li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="welcome-text">
+                    <h2 id="employeeWelcome">Welcome back, John Doe!</h2>
+                    <p>Here's what's happening today</p>
+                </div>
+                <div class="user-actions">
+                    <button class="btn-logout" id="logoutBtn" aria-label="Logout">Logout</button>
+                </div>
+            </header>
+
+            <section class="dashboard-cards" aria-label="Dashboard shortcuts">
+                <article class="card" role="button" tabindex="0" data-modal="profileModal">
+                    <div class="card-header">
+                        <div class="card-icon profile" aria-hidden="true">👤</div>
+                        <div>
+                            <h3 class="card-title">My Profile</h3>
+                            <p class="card-subtitle">View & edit details</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card" role="button" tabindex="0" data-modal="attendanceModal">
+                    <div class="card-header">
+                        <div class="card-icon attendance" aria-hidden="true">📅</div>
+                        <div>
+                            <h3 class="card-title">Attendance</h3>
+                            <p class="card-subtitle">Track your hours</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card" role="button" tabindex="0" data-modal="leaveModal">
+                    <div class="card-header">
+                        <div class="card-icon leave" aria-hidden="true">🏖️</div>
+                        <div>
+                            <h3 class="card-title">Leave Requests</h3>
+                            <p class="card-subtitle">Apply for leave</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card" role="button" tabindex="0" data-modal="payrollModal">
+                    <div class="card-header">
+                        <div class="card-icon payroll" aria-hidden="true">💰</div>
+                        <div>
+                            <h3 class="card-title">My Payroll</h3>
+                            <p class="card-subtitle">View salary details</p>
+                        </div>
+                    </div>
+                </article>
+            </section>
+
+            <section class="activity-section" aria-labelledby="activity-title">
+                <header class="section-header">
+                    <h3 id="activity-title" class="section-title">Recent Activity & Alerts</h3>
+                </header>
+
+                <div class="activity-list" role="list">
+                    <article class="activity-item" role="listitem">
+                        <div class="activity-title">
+                            Attendance Updated
+                            <span class="activity-status status-approved" aria-label="Status: Present">Present</span>
+                        </div>
+                        <time class="activity-time" datetime="2026-01-03T09:00">Today at 9:00 AM</time>
+                    </article>
+
+                    <article class="activity-item" role="listitem">
+                        <div class="activity-title">
+                            Leave Request Approved
+                            <span class="activity-status status-approved" aria-label="Status: Approved">Approved</span>
+                        </div>
+                        <time class="activity-time" datetime="2026-01-02T14:30">Yesterday at 2:30 PM</time>
+                    </article>
+
+                    <article class="activity-item" role="listitem">
+                        <div class="activity-title">
+                            Leave Request Pending
+                            <span class="activity-status status-pending" aria-label="Status: Pending">Pending</span>
+                        </div>
+                        <time class="activity-time" datetime="2026-01-01">2 days ago</time>
+                    </article>
+
+                    <article class="activity-item" role="listitem">
+                        <div class="activity-title">
+                            Profile Updated
+                            <span class="activity-status status-approved" aria-label="Status: Completed">Completed</span>
+                        </div>
+                        <time class="activity-time" datetime="2025-12-31">3 days ago</time>
+                    </article>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="adminDashboard" class="dashboard" role="main">
+        <button class="mobile-menu-toggle" id="adminMenuToggle" aria-label="Toggle navigation menu">
+            <span class="hamburger-icon">☰</span>
+        </button>
+
+        <aside class="sidebar" id="adminSidebar" role="navigation" aria-label="Admin navigation">
+            <div class="sidebar-header">
+                <h1>🏢 EMS Portal</h1>
+                <span class="role-badge" aria-label="Current role">Admin</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <button class="nav-link active" data-section="dashboard" aria-current="page">
+                        <span class="nav-icon" aria-hidden="true">📊</span>
+                        Dashboard
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" data-section="employees">
+                        <span class="nav-icon" aria-hidden="true">👥</span>
+                        Employees
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" data-section="attendance">
+                        <span class="nav-icon" aria-hidden="true">📅</span>
+                        Attendance
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" data-section="leave-approval">
+                        <span class="nav-icon" aria-hidden="true">🏖️</span>
+                        Leave Approval
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" data-section="payroll">
+                        <span class="nav-icon" aria-hidden="true">💰</span>
+                        Payroll
+                    </button>
+                </li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="welcome-text">
+                    <h2 id="adminSectionTitle">Admin Dashboard</h2>
+                    <p id="adminSectionSubtitle">Manage your organization efficiently</p>
+                </div>
+                <div class="user-actions">
+                    <button class="btn-logout" aria-label="Logout">Logout</button>
+                </div>
+            </header>
+
+            <!-- Admin Dashboard Section -->
+            <div class="admin-section active" id="admin-dashboard">
+                <section class="dashboard-cards" aria-label="Dashboard statistics">
+                    <article class="card stats-card">
+                        <div class="card-header">
+                            <div class="card-icon employees" aria-hidden="true">👥</div>
+                            <div>
+                                <h3 class="card-title">Total Employees</h3>
+                                <div class="card-value" aria-label="156 total employees">7</div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="card stats-card">
+                        <div class="card-header">
+                            <div class="card-icon attendance" aria-hidden="true">📅</div>
+                            <div>
+                                <h3 class="card-title">Present Today</h3>
+                                <div class="card-value" aria-label="6 employees present today">6</div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="card stats-card">
+                        <div class="card-header">
+                            <div class="card-icon leave" aria-hidden="true">🏖️</div>
+                            <div>
+                                <h3 class="card-title">Pending Leaves</h3>
+                                <div class="card-value" aria-label="3 pending leave requests">3</div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="card stats-card">
+                        <div class="card-header">
+                            <div class="card-icon reports" aria-hidden="true">📈</div>
+                            <div>
+                                <h3 class="card-title">On Leave</h3>
+                                <div class="card-value" aria-label="1 employee on leave">1</div>
+                            </div>
+                        </div>
+                    </article>
+                </section>
+
+                <section class="activity-section" aria-labelledby="admin-activity-title">
+                    <header class="section-header">
+                        <h3 id="admin-activity-title" class="section-title">Recent Admin Activities</h3>
+                    </header>
+                    <div class="activity-list" role="list">
+                        <article class="activity-item" role="listitem">
+                            <div class="activity-title">
+                                Salary Updated
+                                <span class="activity-status status-approved" aria-label="Status: Completed">Completed</span>
+                            </div>
+                            <time class="activity-time" datetime="2026-01-03T10:00">Today at 10:00 AM</time>
+                        </article>
+                        <article class="activity-item" role="listitem">
+                            <div class="activity-title">
+                                Leave Request Approved
+                                <span class="activity-status status-approved" aria-label="Status: Approved">Approved</span>
+                            </div>
+                            <time class="activity-time" datetime="2026-01-03T09:30">Today at 9:30 AM</time>
+                        </article>
+                        <article class="activity-item" role="listitem">
+                            <div class="activity-title">
+                                Employee Added
+                                <span class="activity-status status-approved" aria-label="Status: Added">Added</span>
+                            </div>
+                            <time class="activity-time" datetime="2026-01-02">Yesterday</time>
+                        </article>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Admin Employees Section -->
+            <div class="admin-section" id="admin-employees">
+                <section class="dashboard-cards" aria-label="Employee statistics">
+                    <article class="card stats-card">
+                        <div class="card-header">
+                            <div class="card-icon employees" aria-hidden="true">👥</div>
+                            <div>
+                                <h3 class="card-title">Total Employees</h3>
+                                <div class="card-value">7</div>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="card stats-card">
+                        <div class="card-header">
+                            <div class="card-icon attendance" aria-hidden="true">✅</div>
+                            <div>
+                                <h3 class="card-title">Active Employees</h3>
+                                <div class="card-value">7</div>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="card stats-card">
+                        <div class="card-header">
+                            <div class="card-icon reports" aria-hidden="true">📋</div>
+                            <div>
+                                <h3 class="card-title">Departments</h3>
+                                <div class="card-value">5</div>
+                            </div>
+                        </div>
+                    </article>
+                </section>
+
+                <section class="table-container" aria-labelledby="employee-directory-title">
+                    <header class="table-header">
+                        <h3 id="employee-directory-title" class="section-title">Employee Directory</h3>
+                        <button class="btn btn-primary" id="addEmployeeBtn" aria-label="Add new employee">Add Employee</button>
+                    </header>
+                    <div class="table-wrapper">
+                        <table role="table" aria-labelledby="employee-directory-title">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Department</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="employeeTableBody">
+                                <tr>
+                                    <td>#E001</td>
+                                    <td>John Doe</td>
+                                    <td>Engineering</td>
+                                    <td><span class="status-badge status-active" aria-label="Active employee">Active</span></td>
+                                    <td><button class="btn-sm btn-view" data-employee="E001" aria-label="View John Doe's details">View</button></td>
+                                </tr>
+                                <tr>
+                                    <td>#E002</td>
+                                    <td>Jane Smith</td>
+                                    <td>Marketing</td>
+                                    <td><span class="status-badge status-active" aria-label="Active employee">Active</span></td>
+                                    <td><button class="btn-sm btn-view" data-employee="E002" aria-label="View Jane Smith's details">View</button></td>
+                                </tr>
+                                <tr>
+                                    <td>#E003</td>
+                                    <td>Mike Johnson</td>
+                                    <td>Sales</td>
+                                    <td><span class="status-badge status-leave" aria-label="Employee on leave">On Leave</span></td>
+                                    <td><button class="btn-sm btn-view" data-employee="E003" aria-label="View Mike Johnson's details">View</button></td>
+                                </tr>
+                                <tr>
+                                    <td>#E004</td>
+                                    <td>Sarah Williams</td>
+                                    <td>HR</td>
+                                    <td><span class="status-badge status-active" aria-label="Active employee">Active</span></td>
+                                    <td><button class="btn-sm btn-view" data-employee="E004" aria-label="View Sarah Williams' details">View</button></td>
+                                </tr>
+                                <tr>
+                                    <td>#E005</td>
+                                    <td>David Brown</td>
+                                    <td>Finance</td>
+                                    <td><span class="status-badge status-active" aria-label="Active employee">Active</span></td>
+                                    <td><button class="btn-sm btn-view" data-employee="E005" aria-label="View David Brown's details">View</button></td>
+                                </tr>
+                                <tr>
+                                    <td>#E006</td>
+                                    <td>Emily Davis</td>
+                                    <td>Engineering</td>
+                                    <td><span class="status-badge status-active" aria-label="Active employee">Active</span></td>
+                                    <td><button class="btn-sm btn-view" data-employee="E006" aria-label="View Emily Davis' details">View</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Admin Attendance Section -->
+            <div class="admin-section" id="admin-attendance">
+                <section class="dashboard-cards" aria-label="Attendance statistics">
+                    <article class="card stats-card">
+                        <div class="card-header">
+                            <div class="card-icon attendance" aria-hidden="true">📅</div>
+                            <div>
+                                <h3 class="card-title">Present Today</h3>
+                                <div class="card-value">6</div>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="card stats-card">
+                        <div class="card-header">
+                            <div class="card-icon leave" aria-hidden="true">🏠</div>
+                            <div>
+                                <h3 class="card-title">Working From Home</h3>
+                                <div class="card-value">0</div>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="card stats-card">
+                        <div class="card-header">
+                            <div class="card-icon reports" aria-hidden="true">⏰</div>
+                            <div>
+                                <h3 class="card-title">Late Arrivals</h3>
+                                <div class="card-value">1</div>
+                            </div>
+                        </div>
+                    </article>
+                </section>
+
+                <section class="table-container" aria-labelledby="attendance-records-title">
+                    <header class="table-header">
+                        <h3 id="attendance-records-title" class="section-title">Attendance Records - Today</h3>
+                        <input type="date" class="date-filter" id="attendanceDateFilter" value="2026-01-03">
+                    </header>
+                    <div class="table-wrapper">
+                        <table role="table" aria-labelledby="attendance-records-title">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Employee ID</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Check-in</th>
+                                    <th scope="col">Check-out</th>
+                                    <th scope="col">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>#E001</td>
+                                    <td>John Doe</td>
+                                    <td>9:00 AM</td>
+                                    <td>-</td>
+                                    <td><span class="status-badge status-active" aria-label="Present">Present</span></td>
+                                </tr>
+                                <tr>
+                                    <td>#E002</td>
+                                    <td>Jane Smith</td>
+                                    <td>8:45 AM</td>
+                                    <td>-</td>
+                                    <td><span class="status-badge status-active" aria-label="Present">Present</span></td>
+                                </tr>
+                                <tr>
+                                    <td>#E003</td>
+                                    <td>Mike Johnson</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td><span class="status-badge status-leave" aria-label="On leave">On Leave</span></td>
+                                </tr>
+                                <tr>
+                                    <td>#E004</td>
+                                    <td>Sarah Williams</td>
+                                    <td>9:15 AM</td>
+                                    <td>-</td>
+                                    <td><span class="status-badge status-active" aria-label="Present">Present</span></td>
+                                </tr>
+                                <tr>
+                                    <td>#E005</td>
+                                    <td>David Brown</td>
+                                    <td>8:30 AM</td>
+                                    <td>-</td>
+                                    <td><span class="status-badge status-active" aria-label="Present">Present</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Admin Leave Approval Section -->
+            <div class="admin-section" id="admin-leave-approval">
+                <section class="dashboard-cards" aria-label="Leave statistics">
+                    <article class="card stats-card">
+                        <div class="card-header">
+                            <div class="card-icon leave" aria-hidden="true">⏳</div>
+                            <div>
+                                <h3 class="card-title">Pending Requests</h3>
+                                <div class="card-value">3</div>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="card stats-card">
+                        <div class="card-header">
+                            <div class="card-icon attendance" aria-hidden="true">✅</div>
+                            <div>
+                                <h3 class="card-title">Approved Today</h3>
+                                <div class="card-value">2</div>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="card stats-card">
+                        <div class="card-header">
+                            <div class="card-icon reports" aria-hidden="true">❌</div>
+                            <div>
+                                <h3 class="card-title">Rejected</h3>
+                                <div class="card-value">0</div>
+                            </div>
+                        </div>
+                    </article>
+                </section>
+
+                <section class="table-container" aria-labelledby="leave-requests-title">
+                    <header class="table-header">
+                        <h3 id="leave-requests-title" class="section-title">Leave Requests</h3>
+                        <select class="status-filter" id="leaveStatusFilter">
+                            <option value="">All Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="approved">Approved</option>
+                            <option value="rejected">Rejected</option>
+                        </select>
+                    </header>
+                    <div class="table-wrapper">
+                        <table role="table" aria-labelledby="leave-requests-title">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Employee</th>
+                                    <th scope="col">Leave Type</th>
+                                    <th scope="col">From</th>
+                                    <th scope="col">To</th>
+                                    <th scope="col">Days</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="leaveRequestsBody">
+                                <tr data-request-id="lr001">
+                                    <td>John Doe</td>
+                                    <td>Sick Leave</td>
+                                    <td>Jan 10, 2026</td>
+                                    <td>Jan 12, 2026</td>
+                                    <td>3</td>
+                                    <td>
+                                        <button class="btn-sm btn-approve" data-action="approve" aria-label="Approve John Doe's leave request">Approve</button>
+                                        <button class="btn-sm btn-reject" data-action="reject" aria-label="Reject John Doe's leave request">Reject</button>
+                                    </td>
+                                </tr>
+                                <tr data-request-id="lr002">
+                                    <td>Jane Smith</td>
+                                    <td>Annual Leave</td>
+                                    <td>Jan 15, 2026</td>
+                                    <td>Jan 20, 2026</td>
+                                    <td>6</td>
+                                    <td>
+                                        <span class="status-badge status-approved">Approved</span>
+                                    </td>
+                                </tr>
+                                <tr data-request-id="lr003">
+                                    <td>Mike Johnson</td>
+                                    <td>Personal Leave</td>
+                                    <td>Jan 18, 2026</td>
+                                    <td>Jan 19, 2026</td>
+                                    <td>2</td>
+                                    <td>
+                                        <button class="btn-sm btn-approve" data-action="approve" aria-label="Approve Mike Johnson's leave request">Approve</button>
+                                        <button class="btn-sm btn-reject" data-action="reject" aria-label="Reject Mike Johnson's leave request">Reject</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Admin Payroll Section -->
+            <div class="admin-section" id="admin-payroll">
+                <section class="dashboard-cards" aria-label="Payroll statistics">
+                    <article class="card stats-card">
+                        <div class="card-header">
+                            <div class="card-icon payroll" aria-hidden="true">💰</div>
+                            <div>
+                                <h3 class="card-title">Total Monthly Payroll</h3>
+                                <div class="card-value">$52,500</div>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="card stats-card">
+                        <div class="card-header">
+                            <div class="card-icon employees" aria-hidden="true">👥</div>
+                            <div>
+                                <h3 class="card-title">Employees on Payroll</h3>
+                                <div class="card-value">7</div>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="card stats-card">
+                        <div class="card-header">
+                            <div class="card-icon reports" aria-hidden="true">📊</div>
+                            <div>
+                                <h3 class="card-title">Average Salary</h3>
+                                <div class="card-value">$75,000</div>
+                            </div>
+                        </div>
+                    </article>
+                </section>
+
+                <section class="table-container" aria-labelledby="payroll-management-title">
+                    <header class="table-header">
+                        <h3 id="payroll-management-title" class="section-title">Employee Payroll Management</h3>
+                        <button class="btn btn-primary" id="refreshPayrollBtn" aria-label="Refresh payroll data">Refresh</button>
+                    </header>
+                    <div class="table-wrapper">
+                        <table role="table" aria-labelledby="payroll-management-title">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Employee ID</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Department</th>
+                                    <th scope="col">Position</th>
+                                    <th scope="col">Annual Salary</th>
+                                    <th scope="col">Monthly Salary</th>
+                                    <th scope="col">Years of Service</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="payrollTableBody">
+                                <!-- Payroll data will be populated by JavaScript -->
+                                <tr>
+                                    <td colspan="8" class="text-center">Loading payroll data...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal: Profile -->
+    <div id="profileModal" class="modal" role="dialog" aria-labelledby="profile-modal-title" aria-hidden="true">
+        <div class="modal-content">
+            <header class="modal-header">
+                <h3 id="profile-modal-title" class="modal-title">My Profile</h3>
+                <button class="close-modal" aria-label="Close profile modal">×</button>
+            </header>
+            <div class="modal-body">
+                <div class="info-row">
+                    <span class="info-label">Employee ID:</span>
+                    <span class="info-value">#E001</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Name:</span>
+                    <span class="info-value">John Doe</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Email:</span>
+                    <span class="info-value">john.doe@company.com</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Department:</span>
+                    <span class="info-value">Engineering</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Position:</span>
+                    <span class="info-value">Senior Developer</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Join Date:</span>
+                    <span class="info-value">Jan 15, 2023</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Phone:</span>
+                    <span class="info-value">+1 (555) 123-4567</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Attendance -->
+    <div id="attendanceModal" class="modal" role="dialog" aria-labelledby="attendance-modal-title" aria-hidden="true">
+        <div class="modal-content">
+            <header class="modal-header">
+                <h3 id="attendance-modal-title" class="modal-title">My Attendance</h3>
+                <button class="close-modal" aria-label="Close attendance modal">×</button>
+            </header>
+            <div class="modal-body">
+                <div class="attendance-summary">
+                    <h4>Current Month Summary</h4>
+                    <div class="info-row">
+                        <span class="info-label">Days Present:</span>
+                        <span class="info-value">22</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Days Absent:</span>
+                        <span class="info-value">1</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Late Arrivals:</span>
+                        <span class="info-value">3</span>
+                    </div>
+                </div>
+                <div class="attendance-actions">
+                    <h4>Today's Status</h4>
+                    <p>Check-in: 9:00 AM</p>
+                    <p>Status: <span class="status-badge status-active">Present</span></p>
+                    <button class="btn btn-primary" id="checkOutBtn">Check Out</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Leave Request -->
+    <div id="leaveModal" class="modal" role="dialog" aria-labelledby="leave-modal-title" aria-hidden="true">
+        <div class="modal-content">
+            <header class="modal-header">
+                <h3 id="leave-modal-title" class="modal-title">Leave Request</h3>
+                <button class="close-modal" aria-label="Close leave request modal">×</button>
+            </header>
+            <div class="modal-body">
+                <form id="leaveRequestForm" class="leave-form">
+                    <div class="form-group">
+                        <label for="leaveType">Leave Type:</label>
+                        <select id="leaveType" name="leaveType" required>
+                            <option value="">Select leave type</option>
+                            <option value="sick">Sick Leave</option>
+                            <option value="annual">Annual Leave</option>
+                            <option value="personal">Personal Leave</option>
+                            <option value="maternity">Maternity Leave</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="startDate">Start Date:</label>
+                        <input type="date" id="startDate" name="startDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="endDate">End Date:</label>
+                        <input type="date" id="endDate" name="endDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reason">Reason:</label>
+                        <textarea id="reason" name="reason" rows="4" placeholder="Please provide a reason for your leave request" required></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Submit Request</button>
+                        <button type="button" class="btn btn-secondary" data-action="cancel">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Employee Payroll -->
+    <div id="payrollModal" class="modal" role="dialog" aria-labelledby="payroll-modal-title" aria-hidden="true">
+        <div class="modal-content">
+            <header class="modal-header">
+                <h3 id="payroll-modal-title" class="modal-title">My Payroll Information</h3>
+                <button class="close-modal" aria-label="Close payroll modal">×</button>
+            </header>
+            <div class="modal-body">
+                <div class="payroll-summary">
+                    <h4>Salary Details</h4>
+                    <div class="info-row">
+                        <span class="info-label">Annual Salary:</span>
+                        <span class="info-value" id="employeeAnnualSalary">Loading...</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Monthly Salary:</span>
+                        <span class="info-value" id="employeeMonthlySalary">Loading...</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Weekly Salary:</span>
+                        <span class="info-value" id="employeeWeeklySalary">Loading...</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Hourly Rate:</span>
+                        <span class="info-value" id="employeeHourlyRate">Loading...</span>
+                    </div>
+                </div>
+                <div class="benefits-summary">
+                    <h4>Benefits & Compensation</h4>
+                    <div class="info-row">
+                        <span class="info-label">Years of Service:</span>
+                        <span class="info-value" id="employeeYearsOfService">Loading...</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Health Insurance:</span>
+                        <span class="info-value" id="employeeHealthInsurance">Loading...</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">401k Match:</span>
+                        <span class="info-value" id="employee401k">Loading...</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Total Monthly Compensation:</span>
+                        <span class="info-value highlight" id="employeeTotalCompensation">Loading...</span>
+                    </div>
+                </div>
+                <div class="payroll-note">
+                    <p><em>Note: This information is read-only. Contact HR for any salary-related inquiries.</em></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Admin Salary Update -->
+    <div id="salaryUpdateModal" class="modal" role="dialog" aria-labelledby="salary-update-modal-title" aria-hidden="true">
+        <div class="modal-content">
+            <header class="modal-header">
+                <h3 id="salary-update-modal-title" class="modal-title">Update Employee Salary</h3>
+                <button class="close-modal" aria-label="Close salary update modal">×</button>
+            </header>
+            <div class="modal-body">
+                <form id="salaryUpdateForm" class="salary-form">
+                    <div class="employee-info">
+                        <h4>Employee Information</h4>
+                        <div class="info-row">
+                            <span class="info-label">Employee:</span>
+                            <span class="info-value" id="updateEmployeeName">Loading...</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Current Salary:</span>
+                            <span class="info-value" id="updateCurrentSalary">Loading...</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="newSalary">New Annual Salary:</label>
+                        <input type="number" id="newSalary" name="newSalary" min="0" step="0.01" required>
+                        <small class="form-help">Enter the new annual salary amount</small>
+                    </div>
+                    <div class="salary-preview">
+                        <h5>New Salary Breakdown:</h5>
+                        <div class="info-row">
+                            <span class="info-label">Monthly:</span>
+                            <span class="info-value" id="previewMonthlySalary">$0.00</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Weekly:</span>
+                            <span class="info-value" id="previewWeeklySalary">$0.00</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Hourly:</span>
+                            <span class="info-value" id="previewHourlySalary">$0.00</span>
+                        </div>
+                    </div>
+                    <input type="hidden" id="updateEmployeeId" name="employeeId">
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Update Salary</button>
+                        <button type="button" class="btn btn-secondary" data-action="cancel">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading overlay -->
+    <div id="loadingOverlay" class="loading-overlay" aria-hidden="true">
+        <div class="loading-spinner" aria-label="Loading"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
