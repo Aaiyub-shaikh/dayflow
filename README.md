@@ -113,7 +113,7 @@ echo 'Database initialized successfully!';
 "
 ```
 
-## 🔧 API Endpoints
+## API Endpoints
 
 ### Health Check
 ```
