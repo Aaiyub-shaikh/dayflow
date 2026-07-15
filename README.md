@@ -4,9 +4,9 @@ A comprehensive web-based Employee Management System with advanced Leave & Time-
 
 ## 🌟 Features
 
-### 3.5 Leave & Time-Off Management
+### Leave & Time-Off Management
 
-#### 3.5.1 Apply for Leave (Employee)
+#### Apply for Leave (Employee)
 - **Multiple Leave Types**: Annual, Sick, Personal, Maternity, Emergency, Study, and Bereavement leave
 - **Date Range Selection**: Intuitive date picker with validation
 - **Leave Type Information**: Display paid/unpaid status and descriptions
@@ -14,7 +14,7 @@ A comprehensive web-based Employee Management System with advanced Leave & Time-
 - **Overlap Detection**: Prevents overlapping leave requests
 - **Real-time Validation**: Client and server-side validation
 
-#### 3.5.2 Leave Approval (Admin/HR)
+#### Leave Approval (Admin/HR)
 - **Comprehensive Dashboard**: View all pending, approved, and rejected requests
 - **Detailed Request Information**: Employee details, leave type, dates, and reasons
 - **Approval Workflow**: One-click approve/reject with optional comments
